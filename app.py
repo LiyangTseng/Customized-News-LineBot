@@ -1,15 +1,18 @@
 from __future__ import unicode_literals
 import os
+import configparser
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-
+from linebot.models import MessageEvent, TextMessage, TextSendMessage
 app = Flask(__name__)
 
+config = configparser.ConfigParser()
+config.read("config.ini")
 # Channel Access Token
-line_bot_api = LineBotApi('4sCZwRAHb8dYzT3ykI3HNsK8Ztm3rolvadOgWtQczgrbmMJ8OmqnbY2m4Ehu1UtGVCJApVUM6FyQoeOWTi4bt4J1v4I4atdxiQHOQEuSiEvB0jlfgbVZhTMQDuxwlFCii33T2DnCWhBU49BHyON8ngdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(config.get("line-bot", "channel_access_token"))
 # Channel Secret
-handler = WebhookHandler('c3a553c03e12f19a2279907c56f33e3d')
+handler = WebhookHandler(config.get("line-bot", "channel_secret"))
 
 # monitor callback from post request
 @app.route("/callback", methods=['POST'])
@@ -25,6 +28,15 @@ def callback():
         abort(400)
 
     return 'OK'
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+        # ignore message from line itself
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text)
+        )
 
 if __name__ == "__main__":
     app.run()
