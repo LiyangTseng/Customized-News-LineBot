@@ -31,12 +31,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def echo(event):
-    # ignore message from line itself
-    if event.source.user_id != "dd1dbe3b-4cb9-4d93-92cb-b2dbd050211d":
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=event.message.text)
-        )
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=event.message.text)
+    )
 
 if __name__ == "__main__":
     app.run()
