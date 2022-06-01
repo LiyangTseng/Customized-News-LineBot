@@ -1,5 +1,4 @@
-# News Crawler
-
+# Customized News LineBot
 ## Goal
 Automatically collect important news and notify users.
 
@@ -12,5 +11,7 @@ Automatically collect important news and notify users.
 ## References
 - [Basic web scraping using beatifulsoup](https://www.learncodewithmike.com/2020/02/python-beautifulsoup-web-scraper.html)
 - [Registrations of Line Developers and Heroku](https://ithelp.ithome.com.tw/articles/10216620)
-- Project deployment on LineBot and Heroku: [1](https://medium.com/@mengchiang000/%E4%BD%88%E7%BD%B2%E8%81%8A%E5%A4%A9%E6%A9%9F%E5%99%A8%E4%BA%BA-linebot-%E5%88%B0heroku-65cbe34c8324), [2](https://ithelp.ithome.com.tw/articles/10217350) 
+- [Line bot deployments and chatbot code template](https://ithelp.ithome.com.tw/articles/10217350) 
+- [Line bot custom reply, chatbot information hiding](https://ithelp.ithome.com.tw/articles/10217767)
 - [Scheduling for Heroku](https://suyenting.github.io/post/linebot-ceb102-class-helper-heroku/) 
+- [APScheduler template in Python](https://github.com/SuYenTing/linebot-ceb102-heroku/blob/main/clock.py)
