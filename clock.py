@@ -31,6 +31,6 @@ sched = BlockingScheduler()
 
 sched.add_job(DoNotSleep, trigger='interval', id="doNotSleeps_job", minutes=20)
 sched.add_job(Notify_News, trigger='cron', id="notify_news_job_once", hour=11, minute=43)
-# sched.add_job(Notify_News, trigger='interval', id="notify_news_job_cont_night", day_of_week='mon-fri', hour=21, minute=30)
-# sched.add_job(Notify_News, trigger='interval', id="notify_news_job_cont_noon", day_of_week='mon-fri', hour=12, minute=00)
+sched.add_job(Notify_News, trigger='cron', id="notify_news_job_cont_night", day_of_week='mon-fri', hour=21, minute=30)
+sched.add_job(Notify_News, trigger='cron', id="notify_news_job_cont_noon", day_of_week='mon-fri', hour=12, minute=00)
 sched.start()
