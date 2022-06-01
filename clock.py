@@ -24,4 +24,5 @@ def DoNotSleep():
 sched = BlockingScheduler()
 
 sched.add_job(DoNotSleep, trigger='interval', id="doNotSleeps_job", minutes=20)
-sched.add_job(Notify_News, trigger='cron', id="notify_news_job", hour=10, minute=32)
+sched.add_job(Notify_News, trigger='cron', id="notify_news_job", hour=10, minute=40)
+sched.add_job(Notify_News, trigger='interval', id="notify_news_job_cont", minutes=5)
