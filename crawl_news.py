@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import pyshorteners
 
 class Base_Crawler():
     def __init__(self, web_url):
@@ -26,6 +27,7 @@ class CNBC_Crawler(Base_Crawler):
                 continue
             link = target.find("a", "RiverCard-title").get("href")
             date = link.split("https://www.cnbc.com/")[1][:10]
+            link = pyshorteners.Shortener().tinyurl.short(link)
             title = "[{date}] {news_title}".format(date=date, 
                                                     news_title=target.find("a", "RiverCard-title").text)
             
