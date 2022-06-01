@@ -15,8 +15,9 @@ def crawl():
         # get news title and link
         title = target.find("a", "RiverCard-title").text
         link = target.find("a", "RiverCard-title").get("href")
-        print(title)
-        print(link)
+        break
+
+    return title, link
 
 if __name__ == "__main__":
     crawl()
