@@ -3,3 +3,4 @@ requests
 flask
 line-bot-sdk
 gunicorn
+APScheduler==3.0.0

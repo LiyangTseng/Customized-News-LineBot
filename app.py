@@ -23,7 +23,7 @@ def callback():
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
-    print(body)
+    print("request body: ", body)
 
     try:
         handler.handle(body, signature)
@@ -34,13 +34,14 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def echo(event):
+    """ need to turn on webhook in LINE developer console !! """
     # get news title and link
     title, link = crawl()
 
     line_bot_api.reply_message(
         event.reply_token,
-        # TextSendMessage(text=event.message.text)
-        TextSendMessage(text="{}\n{}".format(title, link))
+        # TextSendMessage(text="{}\n{}".format(title, link))
+        TextSendMessage(text=event.message.text)
     )
 
 if __name__ == "__main__":
