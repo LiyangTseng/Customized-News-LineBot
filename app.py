@@ -5,7 +5,6 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-from crawl_news import crawl
 app = Flask(__name__)
 
 config = configparser.ConfigParser()
@@ -36,7 +35,6 @@ def callback():
 def echo(event):
     """ need to turn on webhook in LINE developer console !! """
     # get news title and link
-    title, link = crawl()
 
     line_bot_api.reply_message(
         event.reply_token,
