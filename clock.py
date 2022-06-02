@@ -30,8 +30,9 @@ def DoNotSleep():
 sched = BlockingScheduler()
 
 sched.add_job(DoNotSleep, trigger='interval', id="doNotSleeps_job", minutes=20)
-sched.add_job(Notify_News, trigger='cron', id="notify_news_job_once", hour=14, minute=10)
+# sched.add_job(Notify_News, trigger='cron', id="notify_news_job_once", hour=14, minute=10)
 # https://apscheduler.readthedocs.io/en/latest/modules/triggers/cron.html?highlight=day_of_week
+# TODO: check what day in a week to update the news
 sched.add_job(Notify_News, trigger='cron', id="notify_news_job_cont_night", day_of_week='mon-fri', hour=21, minute=30)
 sched.add_job(Notify_News, trigger='cron', id="notify_news_job_cont_noon", day_of_week='mon-fri', hour=12, minute=00)
 sched.start()
