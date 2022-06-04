@@ -5,6 +5,8 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from crawl_news import CNBC_Crawler
+
 app = Flask(__name__)
 
 config = configparser.ConfigParser()
@@ -35,10 +37,22 @@ def callback():
 def echo(event):
     """ need to turn on webhook in LINE developer console !! """
     # TODO: add more interactions with users (keyword spotting)
+    if event.message.text == "cnbc":
+        """ if users query CNBC """
+        crawler = CNBC_Crawler()
+        num_news = 3
+        title_link_pairs = crawler.crawl(num_news)
+        msg = "latest news from {}\n".format(crawler.name)
+        for title, link in title_link_pairs:
+            msg += title + "\n" + link + "\n\n"
+
+        message = TextSendMessage(text=msg)
+    else:
+        message = TextSendMessage(text=event.message.text)
+    
     line_bot_api.reply_message(
         event.reply_token,
-        # TextSendMessage(text="{}\n{}".format(title, link))
-        TextSendMessage(text=event.message.text)
+        TextSendMessage(text=message)
     )
 
 # TODO: add customizing rich menu ?
