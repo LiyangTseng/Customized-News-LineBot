@@ -37,7 +37,7 @@ def callback():
 def echo(event):
     """ need to turn on webhook in LINE developer console !! """
     # TODO: add more interactions with users (keyword spotting)
-    if event.message.text == "cnbc":
+    if event.message.text.lower() == "cnbc":
         """ if users query CNBC """
         crawler = CNBC_Crawler()
         num_news = 3
@@ -52,7 +52,7 @@ def echo(event):
     
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=message)
+        message
     )
 
 # TODO: add customizing rich menu ?
