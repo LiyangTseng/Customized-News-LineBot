@@ -34,13 +34,14 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def echo(event):
     """ need to turn on webhook in LINE developer console !! """
-    # get news title and link
-
+    # TODO: add more interactions with users (keyword spotting)
     line_bot_api.reply_message(
         event.reply_token,
         # TextSendMessage(text="{}\n{}".format(title, link))
         TextSendMessage(text=event.message.text)
     )
+
+# TODO: add customizing rich menu ?
 
 if __name__ == "__main__":
     app.run()

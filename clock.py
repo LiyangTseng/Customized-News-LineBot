@@ -16,7 +16,7 @@ handler = WebhookHandler(config.get("line-bot", "channel_secret"))
 def Notify_News(num_news=3):
     crawler = CNBC_Crawler()
     title_link_pairs = crawler.crawl(num_news)
-    msg = ""
+    msg = "latest news from {}\n".format(crawler.name)
     for title, link in title_link_pairs:
         msg += title + "\n" + link + "\n\n"
 
@@ -30,9 +30,8 @@ def DoNotSleep():
 sched = BlockingScheduler()
 
 sched.add_job(DoNotSleep, trigger='interval', id="doNotSleeps_job", minutes=20)
-# sched.add_job(Notify_News, trigger='cron', id="notify_news_job_once", hour=14, minute=10)
 # https://apscheduler.readthedocs.io/en/latest/modules/triggers/cron.html?highlight=day_of_week
 # TODO: check what day in a week to update the news
-sched.add_job(Notify_News, trigger='cron', id="notify_news_job_cont_night", day_of_week='mon-fri', hour=21, minute=30)
-sched.add_job(Notify_News, trigger='cron', id="notify_news_job_cont_noon", day_of_week='mon-fri', hour=12, minute=00)
+sched.add_job(Notify_News, trigger='cron', id="notify_news_job_cont_night", day_of_week='wed', hour=21, minute=30)
+sched.add_job(Notify_News, trigger='cron', id="notify_news_job_cont_noon", day_of_week='sat', hour=10, minute=00)
 sched.start()

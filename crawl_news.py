@@ -14,6 +14,7 @@ class CNBC_Crawler(Base_Crawler):
     """ crawl week summary (and other news) published by Patti Domm from CNBC """
     def __init__(self, web_url="https://www.cnbc.com/patti-domm/"):
         super(CNBC_Crawler, self).__init__(web_url)
+        self.name = "CNBC"
         # observed from the source code of the website
         self.targets = self.soup.find_all("div", class_="RiverCard-standardBreakerCard RiverCard-specialReportsRiver RiverCard-card")
 
@@ -34,6 +35,8 @@ class CNBC_Crawler(Base_Crawler):
             self.titles_links.append((title, link))
             
         return self.titles_links[:N]
+
+# TODO: add more crawlers for other news sources
 
 if __name__ == "__main__":
     c = CNBC_Crawler()
