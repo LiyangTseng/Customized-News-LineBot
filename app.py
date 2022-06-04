@@ -37,6 +37,7 @@ def callback():
 def echo(event):
     """ need to turn on webhook in LINE developer console !! """
     # TODO: add more interactions with users (keyword spotting)
+    # TODO: fuzzy matching
     if event.message.text.lower() == "cnbc":
         """ if users query CNBC """
         crawler = CNBC_Crawler()
